@@ -1232,6 +1232,10 @@ body.is-dragging-files.has-items .drop-overlay {
   padding-block: clamp(48px, 8vw, 96px);
 }
 
+.section.tight {
+  padding-bottom: 0;
+}
+
 .section.alt {
   background: var(--surface);
   border-block: 1px solid var(--border);

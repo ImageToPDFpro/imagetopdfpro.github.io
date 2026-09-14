@@ -31,6 +31,12 @@ const formatDate = (iso) =>
   new Date(`${iso}T00:00:00Z`).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' });
 const today = () => new Date().toISOString().slice(0, 10);
 
+// Google Consent Mode v2: EEA, UK and Switzerland start with consent denied until a CMP updates it.
+const CONSENT_REGIONS = [
+  'AT', 'BE', 'BG', 'HR', 'CY', 'CZ', 'DK', 'EE', 'FI', 'FR', 'DE', 'GR', 'HU', 'IE', 'IT', 'LV', 'LT', 'LU', 'MT',
+  'NL', 'PL', 'PT', 'RO', 'SK', 'SI', 'ES', 'SE', 'IS', 'LI', 'NO', 'GB', 'CH',
+];
+
 const warnings = [];
 const warn = (msg) => warnings.push(msg);
 
@@ -529,6 +535,11 @@ ${cfg.adsense.pub ? `<meta name="google-adsense-account" content="ca-${cfg.adsen
 <link rel="stylesheet" href="{{asset:css/style.css}}">
 <script type="application/ld+json">${jsonLd(page, ctx)}</script>
 ${
+  cfg.adsense.pub || cfg.analytics.ga4MeasurementId
+    ? `<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('consent','default',{ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',analytics_storage:'denied',region:${JSON.stringify(CONSENT_REGIONS)},wait_for_update:500});gtag('consent','default',{ad_storage:'granted',ad_user_data:'granted',ad_personalization:'granted',analytics_storage:'granted'});</script>`
+    : ''
+}
+${
   cfg.adsense.pub
     ? `<link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-${cfg.adsense.pub}" crossorigin="anonymous"></script>`
@@ -537,7 +548,7 @@ ${
 ${
   cfg.analytics.ga4MeasurementId
     ? `<script async src="https://www.googletagmanager.com/gtag/js?id=${escapeHtml(cfg.analytics.ga4MeasurementId)}"></script>
-<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${escapeHtml(cfg.analytics.ga4MeasurementId)}');</script>`
+<script>gtag('js',new Date());gtag('config','${escapeHtml(cfg.analytics.ga4MeasurementId)}');</script>`
     : ''
 }
 </head>
