@@ -93,6 +93,25 @@ Every push to `main` rebuilds and redeploys automatically.
 
 > **Note about github.io:** AdSense reviews sites on free subdomains more strictly, and approval is not guaranteed. If you're repeatedly rejected for reasons unrelated to content, a custom domain (see below) is the most reliable fix. It needs no code changes.
 
+## AI visibility and instant indexing
+
+Every build generates:
+
+| File | Purpose |
+| --- | --- |
+| `/llms.txt` | Short summary and link index for AI assistants ([llmstxt.org](https://llmstxt.org/)) |
+| `/llms-full.txt` | Full text of every page in one Markdown file |
+| `/<page>/index.html.md` | Markdown version of each page, linked with `<link rel="alternate" type="text/markdown">` |
+| `/robots.txt` | Explicitly allows AI search and assistant crawlers (GPTBot, OAI-SearchBot, ClaudeBot, PerplexityBot, Google-Extended and more) |
+| `/ai.txt` | AI usage permissions |
+| `/feed.xml` | Atom feed of guides, used by aggregators and search engines for faster discovery |
+| `/.well-known/security.txt` | Standard security contact |
+| `/<indexNowKey>.txt` | IndexNow ownership key |
+
+Structured data includes WebApplication, HowTo, FAQPage, Article, BreadcrumbList and Organization.
+
+**IndexNow:** after each deployment, the `Notify IndexNow` job submits the pages that changed in that push to Bing, Yandex, Seznam, Naver and Yep. To submit every URL manually, run **Actions → Deploy to GitHub Pages → Run workflow**. To use your own key, put any 32-character hex string in `indexNowKey`. Google does not use IndexNow, so keep submitting the sitemap in Search Console. Bing Webmaster Tools can import your site directly from Search Console.
+
 ## Using a custom domain later
 
 1. Buy a domain and add the DNS records described in the [GitHub Pages custom domain docs](https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site).
