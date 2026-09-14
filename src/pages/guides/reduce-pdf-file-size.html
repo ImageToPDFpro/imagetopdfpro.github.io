@@ -1,0 +1,84 @@
+<!--meta
+{
+  "title": "How to Reduce PDF File Size Made from Photos",
+  "h1": "How to reduce the file size of a PDF made from photos",
+  "breadcrumb": "Reduce PDF file size",
+  "description": "Why photo PDFs get so large and how to shrink them under 1 MB or 2 MB for email and upload portals, while keeping text sharp and readable.",
+  "excerpt": "Why photo PDFs get huge, and how to get them under upload limits like 1 MB or 2 MB without making them unreadable.",
+  "category": "File size",
+  "layout": "article",
+  "nav": "guides",
+  "order": 4,
+  "published": "2026-09-14",
+  "updated": "2026-09-14",
+  "priority": 0.7
+}
+-->
+<p>"File too large. Maximum size 2 MB." If you've seen that message on a job portal, university application or government website, you're not alone. A PDF made from just three phone photos can easily be 10 MB or more. This guide explains why, and shows you how to shrink it dramatically without making the document hard to read.</p>
+
+<h2>Why PDFs made from photos are so big</h2>
+<p>A PDF that contains photos is essentially a wrapper around those images, so its size is roughly the sum of the image sizes. The problem is that phone cameras capture far more detail than a document needs.</p>
+<ul>
+  <li>A typical 12-megapixel phone photo is <strong>4032 × 3024 pixels</strong> and weighs <strong>2–5 MB</strong> as a JPG.</li>
+  <li>Printed on A4 paper, that's roughly <strong>345 dots per inch (DPI)</strong>, more than a normal office printer uses.</li>
+  <li>On a laptop screen, a whole A4 page is displayed at around <strong>100–150 DPI</strong>. Most of those pixels are never seen.</li>
+</ul>
+<p>Newer phones with 48 MP or 50 MP cameras make this even worse. Reducing the resolution to what the document actually needs is the single most effective way to cut the file size.</p>
+
+<h2>The quick fix: use a compression preset</h2>
+<ol>
+  <li>Open the <a href="{{base}}/">converter</a> and add your images.</li>
+  <li>Under <strong>Image quality</strong>, choose <strong>Balanced</strong> for email, or <strong>Small file</strong> for strict upload limits.</li>
+  <li>Click <strong>Convert to PDF</strong>. The result screen shows the final file size, so you can check it against the limit before downloading.</li>
+  <li>Still too big? Press <strong>Back to editing</strong>, pick the next smaller preset and convert again.</li>
+</ol>
+<div class="table-wrap">
+  <table>
+    <thead><tr><th scope="col">Preset</th><th scope="col">Longest side</th><th scope="col">≈ DPI on A4</th><th scope="col">Typical size per photo page</th></tr></thead>
+    <tbody>
+      <tr><td>Original</td><td>Unchanged</td><td>Unchanged</td><td>Same as your files (2–5 MB)</td></tr>
+      <tr><td>High</td><td>3508 px</td><td>300</td><td>0.8–2 MB</td></tr>
+      <tr><td>Balanced</td><td>2480 px</td><td>210</td><td>300–700 KB</td></tr>
+      <tr><td>Small file</td><td>1600 px</td><td>135</td><td>120–300 KB</td></tr>
+    </tbody>
+  </table>
+</div>
+<p>Sizes vary with the content of the photo. A plain white page with black text compresses far better than a busy, colourful scene or a photo taken in dim light, which contains a lot of grainy "noise".</p>
+<div class="note tip">
+  <p><strong>Rule of thumb:</strong> to fit under a limit, divide the limit by the number of pages. For a 2 MB limit and 5 pages you need about 400 KB per page, which points to <em>Balanced</em> or <em>Small file</em>.</p>
+</div>
+
+<h2>How the compression works</h2>
+<p>There are two separate levers, and good results come from using both:</p>
+<h3>1. Resolution (downscaling)</h3>
+<p>Halving the width and height of an image leaves one quarter of the pixels, which cuts the file size by roughly 75%. For documents, this is almost always invisible, because 150–200 DPI is plenty for reading on screen and acceptable for printing.</p>
+<h3>2. JPEG quality</h3>
+<p>JPEG compression discards fine detail the eye is unlikely to notice. At quality levels around 80%, the result looks nearly identical to the original but is several times smaller. Below about 60%, blocky artefacts start to appear around text edges.</p>
+<p>The converter also checks JPG photos that are already small: if recompressing wouldn't make an image smaller, the original is kept.</p>
+
+<h2>More ways to make the PDF smaller</h2>
+<ul>
+  <li><strong>Crop before converting.</strong> Cut away the table, floor or background around a document using your phone's photo editor. Fewer pixels, smaller file, and it looks more professional.</li>
+  <li><strong>Use a scanner app.</strong> Apps like the iPhone Notes scanner, Google Drive's scan feature or Adobe Scan produce clean, high-contrast black-and-white images that compress extremely well. See our guide to <a href="{{base}}/guides/scan-documents-with-phone/">scanning documents with your phone</a>.</li>
+  <li><strong>Take photos in good light.</strong> Low-light photos are full of noise, and noise is hard to compress. Daylight gives cleaner images and smaller files.</li>
+  <li><strong>Remove unnecessary pages.</strong> Blank backs of pages and duplicate shots add size for nothing.</li>
+  <li><strong>Avoid converting screenshots to JPG first.</strong> Screenshots with text are sharpest as PNG. Let the converter choose the best encoding.</li>
+  <li><strong>Split the document.</strong> If a portal allows several uploads, set <em>Output</em> to <em>PDF per image</em> and upload the pages separately.</li>
+</ul>
+
+<h2>How small is too small?</h2>
+<p>Always open the PDF and zoom in on the smallest text before you submit it. Check that:</p>
+<ul>
+  <li>Small print, stamps and signatures are still legible.</li>
+  <li>Photos on ID documents are still recognisable.</li>
+  <li>Numbers such as account numbers and dates can't be misread (for example 3 vs 8).</li>
+</ul>
+<p>If anything is hard to read, go one preset up. A rejected application because of an unreadable scan costs far more time than a slightly larger upload.</p>
+
+<h2>Frequently asked questions</h2>
+<h3>Can I compress an existing PDF with this tool?</h3>
+<p>No. The converter creates PDFs from images. If you still have the original photos, convert them again with a smaller quality preset.</p>
+<h3>Does compression remove text?</h3>
+<p>No. Compression reduces detail evenly across the whole image. Text remains; at very high compression it may just look slightly softer.</p>
+<h3>Why is my PNG screenshot PDF larger than expected?</h3>
+<p>At <em>Original</em> quality, non-JPEG images are stored losslessly to keep them perfectly crisp. Choose <em>High</em> or <em>Balanced</em> to store them as compressed JPEG instead.</p>

@@ -1,0 +1,15 @@
+{
+  "name": "imagetopdf-pro",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Static, privacy-first image to PDF converter for GitHub Pages.",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "node build.mjs",
+    "dev": "node serve.mjs --watch",
+    "preview": "node build.mjs && node serve.mjs"
+  }
+}

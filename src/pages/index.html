@@ -1,0 +1,437 @@
+<!--meta
+{
+  "title": "Image to PDF Converter: JPG, PNG, HEIC to PDF Free | ImageToPDF Pro",
+  "ogTitle": "Free Image to PDF Converter (private, no upload)",
+  "description": "Convert JPG, PNG, HEIC and WebP images to PDF free. Reorder pages, pick page size and quality. No upload, no sign-up, no watermark. Works on any device.",
+  "layout": "home",
+  "nav": "home",
+  "priority": 1.0,
+  "changefreq": "weekly",
+  "scripts": ["js/converter.js"],
+  "features": [
+    "Convert JPG, PNG, HEIC, WebP, GIF, BMP and AVIF to PDF",
+    "Files are processed locally and never uploaded",
+    "Lossless JPEG embedding at original quality",
+    "Drag and drop page ordering and rotation",
+    "A4, Letter, Legal, A3, A5 or image-sized pages",
+    "Adjustable margins, fit and compression",
+    "One combined PDF or a separate PDF per image",
+    "Works offline as an installable web app"
+  ]
+}
+-->
+<section class="tool-hero">
+  <div class="container">
+    <div class="hero-head">
+      <h1>Image to PDF Converter</h1>
+      <p class="lede">Turn JPG, PNG, HEIC and WebP images into one clean PDF in seconds. Free, no sign-up, no watermark, and your files never leave your device.</p>
+    </div>
+
+    <div class="converter" id="converter">
+      <input type="file" id="file-input" class="visually-hidden" multiple accept="image/*,.heic,.heif" tabindex="-1" aria-hidden="true">
+
+      <div class="dropzone" id="dropzone">
+        <div class="dropzone-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="36" height="36" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="9" cy="9" r="2"/><path d="M21 15l-5-5L5 21"/></svg>
+        </div>
+        <h2 class="dropzone-title">Drop your images here</h2>
+        <p class="dropzone-sub">JPG, PNG, HEIC, WebP, GIF, BMP and AVIF</p>
+        <button class="btn btn-primary btn-lg" type="button" data-pick>
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+          Choose images
+        </button>
+        <p class="dropzone-hint">or paste from clipboard with <kbd>Ctrl</kbd> + <kbd>V</kbd></p>
+      </div>
+
+      <div class="workspace" id="workspace" hidden>
+        <section class="panel items-panel" aria-labelledby="item-count">
+          <div class="toolbar">
+            <h2 class="toolbar-count" id="item-count">0 images</h2>
+            <button class="btn btn-secondary btn-sm" type="button" data-pick>
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+              Add images
+            </button>
+            <label class="visually-hidden" for="sort-select">Sort images</label>
+            <select class="select-inline" id="sort-select">
+              <option value="">Sort…</option>
+              <option value="name-asc">Name (A to Z)</option>
+              <option value="name-desc">Name (Z to A)</option>
+              <option value="date-asc">Oldest first</option>
+              <option value="date-desc">Newest first</option>
+              <option value="reverse">Reverse order</option>
+            </select>
+            <button class="btn btn-ghost btn-sm" type="button" id="clear-all">Clear all</button>
+          </div>
+
+          <ul class="thumb-grid" id="thumb-grid" role="list" aria-label="Pages in your PDF">
+            <li id="add-tile">
+              <button class="add-tile" type="button" data-pick>
+                <span class="plus" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span>
+                Add more
+              </button>
+            </li>
+          </ul>
+          <p class="grid-hint">Each image becomes one page. Drag cards or use the arrows to change the order.</p>
+        </section>
+
+        <form class="panel settings-panel" id="settings" aria-labelledby="settings-title" novalidate>
+          <h2 class="settings-title" id="settings-title">PDF settings</h2>
+
+          <div class="field">
+            <label class="field-label" for="pageSize">Page size</label>
+            <select class="select" id="pageSize" name="pageSize">
+              <option value="a4">A4 (210 × 297 mm)</option>
+              <option value="letter">US Letter (8.5 × 11 in)</option>
+              <option value="legal">US Legal (8.5 × 14 in)</option>
+              <option value="a3">A3 (297 × 420 mm)</option>
+              <option value="a5">A5 (148 × 210 mm)</option>
+              <option value="fit">Same as image</option>
+            </select>
+          </div>
+
+          <fieldset class="field" id="orientation-field">
+            <legend>Orientation</legend>
+            <div class="segmented">
+              <label><input type="radio" name="orientation" value="auto" checked><span>Auto</span></label>
+              <label><input type="radio" name="orientation" value="portrait"><span>Portrait</span></label>
+              <label><input type="radio" name="orientation" value="landscape"><span>Landscape</span></label>
+            </div>
+          </fieldset>
+
+          <fieldset class="field">
+            <legend>Margin</legend>
+            <div class="segmented">
+              <label><input type="radio" name="margin" value="none"><span>None</span></label>
+              <label><input type="radio" name="margin" value="small" checked><span>Small</span></label>
+              <label><input type="radio" name="margin" value="large"><span>Large</span></label>
+            </div>
+          </fieldset>
+
+          <fieldset class="field" id="fit-field">
+            <legend>Image fit</legend>
+            <div class="segmented">
+              <label><input type="radio" name="fit" value="contain" checked><span>Fit whole image</span></label>
+              <label><input type="radio" name="fit" value="cover"><span>Fill page</span></label>
+            </div>
+          </fieldset>
+
+          <hr class="settings-divider">
+
+          <div class="field">
+            <label class="field-label" for="quality">Image quality</label>
+            <select class="select" id="quality" name="quality" aria-describedby="quality-hint">
+              <option value="original">Original (no compression)</option>
+              <option value="high">High (print)</option>
+              <option value="balanced">Balanced (email)</option>
+              <option value="small">Small file (uploads)</option>
+            </select>
+            <p class="field-hint" id="quality-hint"></p>
+          </div>
+
+          <fieldset class="field">
+            <legend>Output</legend>
+            <div class="segmented">
+              <label><input type="radio" name="output" value="single" checked><span>One PDF</span></label>
+              <label><input type="radio" name="output" value="separate"><span>PDF per image</span></label>
+            </div>
+          </fieldset>
+
+          <div class="field">
+            <label class="field-label" for="filename">File name <span class="field-optional">(optional)</span></label>
+            <div class="input-group">
+              <input class="input" id="filename" name="filename" type="text" placeholder="my-document" autocomplete="off" autocapitalize="off" spellcheck="false" maxlength="120">
+              <span class="input-addon" aria-hidden="true">.pdf</span>
+            </div>
+          </div>
+
+          <div class="convert-area">
+            <button class="btn btn-primary btn-lg btn-block" id="convert-btn" type="submit" disabled>
+              Convert to PDF
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </button>
+            <div class="progress" id="progress" hidden>
+              <div class="progress-bar" id="progress-bar" role="progressbar" aria-label="PDF creation progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span></span></div>
+              <p class="progress-label"><span id="progress-text">Preparing…</span><span id="progress-count">0 / 0</span></p>
+            </div>
+            <p class="convert-note">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
+              Processed on your device. Nothing is uploaded.
+            </p>
+          </div>
+        </form>
+      </div>
+
+      <section class="panel result" id="result" aria-labelledby="result-title" hidden>
+        <div class="result-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="36" height="36" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>
+        </div>
+        <h2 id="result-title" tabindex="-1">Your PDF is ready</h2>
+        <p class="result-meta" id="result-meta"></p>
+        <div class="result-actions">
+          <a class="btn btn-primary btn-lg" id="download-btn" href="#" download>
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg>
+            <span id="download-label">Download PDF</span>
+          </a>
+          <button class="btn btn-secondary btn-lg" id="share-btn" type="button" hidden>
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="2.5"/><circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="19" r="2.5"/><path d="M8.2 10.8l7.6-4.4M8.2 13.2l7.6 4.4"/></svg>
+            Share
+          </button>
+        </div>
+        <div class="result-actions secondary">
+          <button class="btn btn-ghost" id="edit-btn" type="button">Back to editing</button>
+          <button class="btn btn-ghost" id="restart-btn" type="button">Start a new PDF</button>
+        </div>
+      </section>
+
+      <div class="drop-overlay" aria-hidden="true"><p>Drop images to add them</p></div>
+    </div>
+
+    <ul class="trust-row" role="list">
+      <li><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>100% free</li>
+      <li><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>No upload</li>
+      <li><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>No watermark</li>
+      <li><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>No sign-up</li>
+      <li><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Works offline</li>
+    </ul>
+  </div>
+</section>
+
+<div id="sr-status" class="visually-hidden" role="status" aria-live="polite"></div>
+<div id="toasts" class="toast-region" aria-live="assertive"></div>
+
+<section class="section" id="how-it-works" aria-labelledby="how-title">
+  <div class="container">
+    <div class="section-head">
+      <p class="eyebrow">How it works</p>
+      <h2 id="how-title">Convert images to PDF in three steps</h2>
+      <p>No software to install and no account to create. It works the same on Windows, Mac, Android, iPhone and Chromebook.</p>
+    </div>
+    <ol class="steps">
+      <li class="step">
+        <h3>Add your images</h3>
+        <p>Drag photos onto the page, tap <strong>Choose images</strong>, or paste a screenshot. Add as many as you need, in any mix of formats.</p>
+      </li>
+      <li class="step">
+        <h3>Arrange and adjust</h3>
+        <p>Drag cards to set the page order, rotate sideways photos, and pick the page size, margins and quality that suit your document.</p>
+      </li>
+      <li class="step">
+        <h3>Download your PDF</h3>
+        <p>Press <strong>Convert to PDF</strong>. Your file is built right in the browser in seconds and is ready to download or share.</p>
+      </li>
+    </ol>
+  </div>
+</section>
+
+{{ad:home}}
+
+<section class="section alt" id="features" aria-labelledby="features-title">
+  <div class="container">
+    <div class="section-head">
+      <p class="eyebrow">Features</p>
+      <h2 id="features-title">Everything you need, nothing you don't</h2>
+      <p>A focused tool that does one job very well: turning pictures into tidy, shareable PDF documents.</p>
+    </div>
+    <ul class="feature-grid" role="list">
+      <li class="feature">
+        <div class="feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5c0 4.5-3 8.5-7 10-4-1.5-7-5.5-7-10V6z"/><path d="M9 12l2 2 4-4"/></svg></div>
+        <h3>Private by design</h3>
+        <p>Conversion runs inside your browser. Your images are never uploaded, stored or seen by anyone else.</p>
+      </li>
+      <li class="feature">
+        <div class="feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3 7h7l-5.5 4.5 2 7.5L12 16.5 5.5 21l2-7.5L2 9h7z"/></svg></div>
+        <h3>Original quality</h3>
+        <p>JPEG photos are placed into the PDF byte-for-byte, so there is zero quality loss unless you choose to compress.</p>
+      </li>
+      <li class="feature">
+        <div class="feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="2" width="12" height="20" rx="3"/><path d="M11 18h2"/></svg></div>
+        <h3>iPhone HEIC photos</h3>
+        <p>HEIC and HEIF pictures from iPhones and iPads are converted automatically, even in browsers that can't open them.</p>
+      </li>
+      <li class="feature">
+        <div class="feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 4v16M7 20l-3-3M7 20l3-3M17 20V4M17 4l-3 3M17 4l3 3"/></svg></div>
+        <h3>Easy page ordering</h3>
+        <p>Drag and drop to reorder, sort by name or date, rotate in 90° steps and remove pages with one tap.</p>
+      </li>
+      <li class="feature">
+        <div class="feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H6a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V8z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></svg></div>
+        <h3>Real page sizes</h3>
+        <p>Choose A4, US Letter, Legal, A3, A5 or pages that match each image, with auto orientation and adjustable margins.</p>
+      </li>
+      <li class="feature">
+        <div class="feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 14h6v6M20 10h-6V4M14 10l7-7M3 21l7-7"/></svg></div>
+        <h3>Smaller files on demand</h3>
+        <p>Compression presets shrink PDFs for email attachments and upload portals with strict size limits.</p>
+      </li>
+      <li class="feature">
+        <div class="feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3M16 3h3a2 2 0 0 1 2 2v3M8 21H5a2 2 0 0 1-2-2v-3M16 21h3a2 2 0 0 0 2-2v-3"/><rect x="8" y="8" width="8" height="8" rx="1"/></svg></div>
+        <h3>One PDF or many</h3>
+        <p>Combine every image into a single document, or create a separate PDF for each image, bundled in a ZIP.</p>
+      </li>
+      <li class="feature">
+        <div class="feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5a10 10 0 0 1 14 0M8.5 16a5 5 0 0 1 7 0M2 9a14.5 14.5 0 0 1 20 0"/><circle cx="12" cy="19.5" r="1"/></svg></div>
+        <h3>Works offline</h3>
+        <p>After your first visit the converter keeps working without internet. You can also install it like an app.</p>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="privacy-title">
+  <div class="container split">
+    <div>
+      <p class="eyebrow">Privacy first</p>
+      <h2 id="privacy-title">Your documents stay on your device</h2>
+      <p class="lede">Most online converters upload your files to their servers. We don't. The PDF is assembled by your own browser, which matters when you are converting IDs, receipts, contracts or medical papers.</p>
+      <ul class="check-list" role="list">
+        <li>No file ever travels over the internet during conversion</li>
+        <li>No account, email address or personal details required</li>
+        <li>Close the tab and every image is gone from memory</li>
+        <li>You can disconnect from the internet and it still works</li>
+      </ul>
+    </div>
+    <div class="privacy-visual" aria-hidden="true">
+      <div class="flow">
+        <div class="flow-node">
+          <span class="feature-icon"><svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="9" cy="9" r="2"/><path d="M21 15l-5-5L5 21"/></svg></span>
+          Your images
+        </div>
+        <svg class="flow-arrow" viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        <div class="flow-node">
+          <span class="feature-icon"><svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H6a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V8z"/><path d="M14 3v5h5"/></svg></span>
+          Your PDF
+        </div>
+      </div>
+      <p class="flow-blocked">Everything happens inside this browser tab</p>
+    </div>
+  </div>
+</section>
+
+<section class="section alt" aria-labelledby="formats-title">
+  <div class="container">
+    <div class="section-head">
+      <p class="eyebrow">Supported formats</p>
+      <h2 id="formats-title">Works with the images you already have</h2>
+      <p>Mix formats freely. A PNG screenshot, a JPG scan and a HEIC photo can all go into the same PDF.</p>
+    </div>
+    <ul class="chip-list" role="list">
+      <li class="chip">JPG</li>
+      <li class="chip">JPEG</li>
+      <li class="chip">PNG</li>
+      <li class="chip">HEIC</li>
+      <li class="chip">HEIF</li>
+      <li class="chip">WebP</li>
+      <li class="chip">GIF</li>
+      <li class="chip">BMP</li>
+      <li class="chip">AVIF</li>
+      <li class="chip">SVG</li>
+    </ul>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="guide-title">
+  <div class="container long-read">
+    <div class="prose">
+      <h2 id="guide-title">Why convert images to PDF?</h2>
+      <p>Photos are great for sharing moments, but they are awkward for documents. Send someone eight separate pictures of a signed form and they have to open, rotate and scroll through each one. Put the same pictures into a PDF and they receive one file, in the right order, that looks identical on every phone, tablet and computer and prints at the correct size.</p>
+      <p>That is why banks, universities, employers and government portals usually ask for PDF uploads. A PDF keeps pages together, preserves orientation and supports standard paper sizes such as A4 and US Letter. It is also easy to archive, search for and attach to email.</p>
+
+      <h3>Common reasons people use this converter</h3>
+      <ul>
+        <li><strong>Applications and forms:</strong> scanned ID cards, certificates, mark sheets and signed documents for online submissions.</li>
+        <li><strong>Receipts and expenses:</strong> a month of receipt photos combined into one expense report.</li>
+        <li><strong>Study notes:</strong> photos of whiteboards, handwritten notes or textbook pages turned into a single study pack.</li>
+        <li><strong>Work documents:</strong> screenshots, diagrams and design mockups shared as one reviewable file.</li>
+        <li><strong>Memories:</strong> photo collections, recipes or kids' drawings saved as a printable booklet.</li>
+      </ul>
+
+      <h3>Tips for the best-looking PDF</h3>
+      <ol>
+        <li><strong>Shoot in good light.</strong> For documents, daylight near a window beats a flash, which creates glare.</li>
+        <li><strong>Keep the camera parallel</strong> to the page to avoid a tilted, trapezoid look.</li>
+        <li><strong>Pick the right fit.</strong> "Fit whole image" never crops anything. "Fill page" removes white borders but may trim the edges.</li>
+        <li><strong>Use "Same as image"</strong> page size for screenshots and artwork where you don't want any white space.</li>
+        <li><strong>Compress only when needed.</strong> Keep "Original" for printing and archiving. Switch to "Balanced" or "Small file" when a website has an upload limit.</li>
+      </ol>
+
+      <h3>Which quality setting should I choose?</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th scope="col">Setting</th><th scope="col">Best for</th><th scope="col">What happens</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Original</td><td>Printing, archiving, photos</td><td>JPEGs are embedded untouched; other formats are stored losslessly.</td></tr>
+            <tr><td>High</td><td>Printing with smaller files</td><td>Images are limited to about 300 DPI on A4 and lightly compressed.</td></tr>
+            <tr><td>Balanced</td><td>Email and screen reading</td><td>About 200 DPI on A4 with good JPEG quality. Often 60–80% smaller.</td></tr>
+            <tr><td>Small file</td><td>Portals with strict size limits</td><td>About 130 DPI on A4 with stronger compression. Text stays readable.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Want to go deeper? Our guides explain <a href="{{base}}/guides/reduce-pdf-file-size/">how to reduce PDF file size</a>, <a href="{{base}}/guides/pdf-page-size-margins-dpi/">which page size and DPI to use</a> and <a href="{{base}}/guides/scan-documents-with-phone/">how to scan documents with your phone</a>.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section alt" aria-labelledby="guides-title">
+  <div class="container">
+    <div class="section-head">
+      <p class="eyebrow">Guides</p>
+      <h2 id="guides-title">Learn the tricks</h2>
+      <p>Short, practical guides for getting perfect PDFs from your photos.</p>
+    </div>
+    {{guides_list:3}}
+    <p class="center mt-lg"><a class="btn btn-secondary" href="{{base}}/guides/">Browse all guides</a></p>
+  </div>
+</section>
+
+<section class="section" id="faq" aria-labelledby="faq-title">
+  <div class="container">
+    <div class="section-head">
+      <p class="eyebrow">FAQ</p>
+      <h2 id="faq-title">Frequently asked questions</h2>
+    </div>
+    <div class="faq">
+      <details class="faq-item">
+        <summary>Is this image to PDF converter really free?</summary>
+        <div><p>Yes. There are no limits on files or pages, no watermark, no trial and no sign-up. The site is supported by advertising, which lets us keep the converter free for everyone.</p></div>
+      </details>
+      <details class="faq-item">
+        <summary>Are my images uploaded to a server?</summary>
+        <div><p>No. The conversion happens entirely inside your web browser using your device's own processing power. Your images are never sent over the internet, so we can't see, store or share them. You can even turn off your internet connection after the page loads and it will still work.</p></div>
+      </details>
+      <details class="faq-item">
+        <summary>Will converting to PDF reduce the image quality?</summary>
+        <div><p>Not with the default "Original" setting. JPEG images are copied into the PDF exactly as they are, and PNG, WebP and other formats are stored losslessly. Quality only changes if you pick "High", "Balanced" or "Small file" to make the PDF smaller.</p></div>
+      </details>
+      <details class="faq-item">
+        <summary>How do I convert iPhone HEIC photos to PDF?</summary>
+        <div><p>Just add them like any other picture. HEIC and HEIF files are detected and converted automatically, even in browsers such as Chrome and Firefox that can't display HEIC on their own. Conversion of HEIC photos takes a few extra seconds. See our <a href="{{base}}/guides/iphone-heic-to-pdf/">iPhone photo guide</a> for more tips.</p></div>
+      </details>
+      <details class="faq-item">
+        <summary>How many images can I put in one PDF?</summary>
+        <div><p>There is no fixed limit. Because everything runs on your device, the practical limit depends on its memory. Computers handle hundreds of photos easily. On older phones, very large batches may need the "Balanced" quality setting.</p></div>
+      </details>
+      <details class="faq-item">
+        <summary>How do I change the order of the pages?</summary>
+        <div><p>Drag an image card to a new position. On phones and tablets, drag using the handle in the top-right corner of each card. You can also use the arrow buttons under each image, or sort everything by file name or date from the <strong>Sort</strong> menu.</p></div>
+      </details>
+      <details class="faq-item">
+        <summary>Can I make the PDF smaller for email or an upload portal?</summary>
+        <div><p>Yes. Set <strong>Image quality</strong> to "Balanced" for email or "Small file" for websites with strict limits such as 1 MB or 2 MB. Photos taken on modern phones usually shrink by 70–90% while staying perfectly readable.</p></div>
+      </details>
+      <details class="faq-item">
+        <summary>Does it work on Android and iPhone?</summary>
+        <div><p>Yes. It works in Chrome, Safari, Edge, Firefox and Samsung Internet on phones, tablets and computers. On mobile you can pick photos straight from your gallery or take a new photo with the camera.</p></div>
+      </details>
+      <details class="faq-item">
+        <summary>Why is my photo sideways in the preview?</summary>
+        <div><p>Some cameras save orientation information that not every app reads the same way. Tap the rotate button on the card until the preview looks right. The PDF will match the preview exactly.</p></div>
+      </details>
+      <details class="faq-item">
+        <summary>Can I install it as an app?</summary>
+        <div><p>Yes. In Chrome or Edge, use "Install app" from the address bar or menu. On iPhone, tap Share and then "Add to Home Screen". The installed app opens instantly and works offline.</p></div>
+      </details>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,94 @@
+<!--meta
+{
+  "title": "Convert Images to PDF on Windows and Mac",
+  "h1": "How to convert images to PDF on Windows and Mac",
+  "breadcrumb": "Images to PDF on Windows and Mac",
+  "description": "Use Microsoft Print to PDF on Windows, or Quick Actions and Preview on Mac, to turn pictures into PDFs without installing software. Steps, tips and limits.",
+  "excerpt": "Built-in ways to make PDFs from pictures with Microsoft Print to PDF, macOS Quick Actions and Preview, and when to use a converter instead.",
+  "category": "Desktop",
+  "layout": "article",
+  "nav": "guides",
+  "order": 7,
+  "published": "2026-09-14",
+  "updated": "2026-09-14",
+  "priority": 0.7
+}
+-->
+<p>Windows and macOS both include tools that can turn images into a PDF without downloading anything. They're handy to know, especially when you're offline on an unfamiliar computer. This guide walks through each method, explains the settings that trip people up, and helps you decide when a dedicated converter is the better option.</p>
+
+<h2>Windows 10 and 11: Microsoft Print to PDF</h2>
+<p>Windows includes a virtual printer called <strong>Microsoft Print to PDF</strong>. Instead of sending pages to paper, it saves them as a PDF file.</p>
+<h3>Step by step</h3>
+<ol>
+  <li>Open <strong>File Explorer</strong> and go to the folder with your images.</li>
+  <li>Select the images. Hold <kbd>Ctrl</kbd> and click to choose several, or press <kbd>Ctrl</kbd> + <kbd>A</kbd> to select all.</li>
+  <li>Right-click the selection and choose <strong>Print</strong>. On Windows 11, if you don't see it, choose <strong>Show more options</strong> first.</li>
+  <li>In the <em>Print Pictures</em> window, set <strong>Printer</strong> to <strong>Microsoft Print to PDF</strong>.</li>
+  <li>Choose the <strong>paper size</strong> (for example A4 or Letter) and a layout from the list on the right. <strong>Full page photo</strong> places one image on each page.</li>
+  <li>Untick <strong>Fit picture to frame</strong> if you don't want the edges of your images cropped.</li>
+  <li>Click <strong>Print</strong>, choose a file name and location, and click <strong>Save</strong>.</li>
+</ol>
+<div class="note">
+  <p><strong>Watch out for cropping:</strong> "Fit picture to frame" is ticked by default. It fills the page by cutting off parts of the image that don't match the page shape, which can remove the edges of a document or ID card.</p>
+</div>
+<h3>Can't find Microsoft Print to PDF?</h3>
+<p>It can be turned off. Search the Start menu for <strong>Turn Windows features on or off</strong>, tick <strong>Microsoft Print to PDF</strong> and click <strong>OK</strong>.</p>
+<h3>Limitations on Windows</h3>
+<ul>
+  <li>Page order follows the order of the files in the folder, which is hard to control without renaming files.</li>
+  <li>There is no way to rotate individual images in the print dialog.</li>
+  <li>HEIC photos from an iPhone need the HEIF extension from the Microsoft Store before Windows can print them.</li>
+  <li>There's no compression option, so PDFs from phone photos can be very large.</li>
+</ul>
+
+<h2>macOS: Quick Actions (fastest)</h2>
+<p>Since macOS Mojave, Finder can create a PDF from images in two clicks.</p>
+<ol>
+  <li>In <strong>Finder</strong>, select your images. Hold <kbd>⌘</kbd> and click to choose several.</li>
+  <li>Right-click (or <kbd>Control</kbd>-click) the selection.</li>
+  <li>Choose <strong>Quick Actions → Create PDF</strong>.</li>
+</ol>
+<p>A new PDF appears in the same folder, named after the first image. Pages follow the order of the files in the Finder window, so sort the window by name first if order matters. Each page takes the size of its image.</p>
+
+<h2>macOS: Preview (more control)</h2>
+<p>Preview lets you reorder pages and choose a paper size.</p>
+<ol>
+  <li>Select your images in Finder, right-click and choose <strong>Open With → Preview</strong>.</li>
+  <li>If the sidebar isn't visible, choose <strong>View → Thumbnails</strong>.</li>
+  <li><strong>Drag thumbnails</strong> in the sidebar to reorder. To rotate an image, select it and press <kbd>⌘</kbd> + <kbd>R</kbd>.</li>
+  <li>Click a thumbnail and press <kbd>⌘</kbd> + <kbd>A</kbd> to select all images.</li>
+  <li>Choose <strong>File → Print</strong> (<kbd>⌘</kbd> + <kbd>P</kbd>).</li>
+  <li>Set the <strong>paper size</strong> and choose <strong>Scale to Fit: Print Entire Image</strong> to avoid cropping.</li>
+  <li>Open the <strong>PDF</strong> menu at the bottom of the dialog and choose <strong>Save as PDF</strong>.</li>
+</ol>
+<div class="note tip">
+  <p><strong>Tip:</strong> In the print dialog, "Fill Entire Paper" crops images to cover the page, similar to "Fill page" in our converter. "Print Entire Image" keeps the whole picture.</p>
+</div>
+
+<h2>ChromeOS and Linux</h2>
+<p>Open an image in the browser or the Gallery app, press <kbd>Ctrl</kbd> + <kbd>P</kbd> and choose <strong>Save as PDF</strong> as the destination. This works well for single images. For multiple images, a browser-based converter is much quicker.</p>
+
+<h2>Built-in tools vs an online converter</h2>
+<div class="table-wrap">
+  <table>
+    <thead><tr><th scope="col">Feature</th><th scope="col">Windows Print to PDF</th><th scope="col">Mac Quick Actions</th><th scope="col">Mac Preview</th><th scope="col"><a href="{{base}}/">{{siteName}}</a></th></tr></thead>
+    <tbody>
+      <tr><td>Reorder pages</td><td>Rename files</td><td>Rename files</td><td>Drag and drop</td><td>Drag and drop, sort</td></tr>
+      <tr><td>Rotate pages</td><td>No</td><td>No</td><td>Yes</td><td>Yes</td></tr>
+      <tr><td>Paper sizes</td><td>Yes</td><td>Image size only</td><td>Yes</td><td>Yes, or image size</td></tr>
+      <tr><td>Margins</td><td>Layout dependent</td><td>No</td><td>Printer margins</td><td>None, small or large</td></tr>
+      <tr><td>Compression</td><td>No</td><td>No</td><td>No</td><td>4 presets</td></tr>
+      <tr><td>HEIC support</td><td>With extension</td><td>Yes</td><td>Yes</td><td>Yes, in any browser</td></tr>
+      <tr><td>Files uploaded?</td><td>No</td><td>No</td><td>No</td><td>No</td></tr>
+    </tbody>
+  </table>
+</div>
+<p>Built-in tools are perfect for a quick, one-off PDF. If you need to control page order easily, rotate a few photos, keep the file under an upload limit, or you're working across different devices, the online converter saves time and gives the same result everywhere.</p>
+
+<h2>Frequently asked questions</h2>
+<h3>Does printing to PDF reduce image quality?</h3>
+<p>It can. Virtual printers may resample images to the printer resolution. If image quality is critical, use a tool that embeds the original image data, such as our converter at <em>Original</em> quality.</p>
+<h3>Why is my PDF blank or missing pages?</h3>
+<p>This usually means an image format the system can't read, such as HEIC on Windows without the extension, or WebP in older software. Convert those images first, or use a browser-based converter that supports them.</p>
+<h3>Can I do this on a work computer without admin rights?</h3>
+<p>Yes. All the methods in this guide, and our online converter, work without installing anything.</p>

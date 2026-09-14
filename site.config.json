@@ -1,0 +1,34 @@
+{
+  "siteName": "ImageToPDF Pro",
+  "shortName": "ImageToPDF",
+  "tagline": "Convert images to PDF free, fast and 100% private",
+  "description": "Free online image to PDF converter. Turn JPG, PNG, HEIC, WebP and more into a high-quality PDF in seconds. No upload, no sign-up, no watermark: your files never leave your device.",
+
+  "siteUrl": "https://USERNAME.github.io",
+  "basePath": "",
+
+  "contactEmail": "",
+  "githubRepo": "",
+
+  "adsense": {
+    "publisherId": "",
+    "slots": {
+      "home": "",
+      "article": "",
+      "footer": ""
+    }
+  },
+
+  "analytics": {
+    "ga4MeasurementId": ""
+  },
+
+  "verification": {
+    "google": "",
+    "bing": ""
+  },
+
+  "themeColor": "#c7362c",
+  "backgroundColor": "#faf8f5",
+  "lastPolicyUpdate": "2026-09-14"
+}

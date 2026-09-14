@@ -1,0 +1,66 @@
+<!--meta
+{
+  "title": "Contact Us",
+  "h1": "Contact us",
+  "breadcrumb": "Contact",
+  "description": "Get in touch with the ImageToPDF Pro team for questions, feedback, bug reports, feature requests or privacy enquiries.",
+  "lede": "Questions, feedback or a bug to report? We read every message.",
+  "layout": "page",
+  "nav": "contact",
+  "schemaType": "ContactPage",
+  "priority": 0.5,
+  "scripts": ["js/contact.js"]
+}
+-->
+<div class="contact-card">
+  <div class="card">
+    <h2 class="cta-title">Email</h2>
+    <p>The fastest way to reach us. We usually reply within 2 business days.</p>
+    <p>{{contactEmailLink}}</p>
+  </div>
+  {{#if githubRepo}}
+  <div class="card">
+    <h2 class="cta-title">Report a bug</h2>
+    <p>Found something broken? Open an issue so we can track and fix it.</p>
+    <p><a href="https://github.com/{{githubRepo}}/issues" rel="noopener">Open a GitHub issue</a></p>
+  </div>
+  {{/if}}
+</div>
+
+{{#if contactEmail}}
+<h2>Send us a message</h2>
+<p>Fill in the form below and press <strong>Open in email app</strong>. Your email program opens with the message ready to send. Nothing is submitted through this website.</p>
+<form class="form-grid" id="contact-form" data-email="{{contactEmail}}" novalidate>
+  <div class="field">
+    <label class="field-label" for="contact-topic">Topic</label>
+    <select class="select" id="contact-topic" name="topic">
+      <option>General question</option>
+      <option>Bug report</option>
+      <option>Feature request</option>
+      <option>Privacy request</option>
+      <option>Advertising</option>
+    </select>
+  </div>
+  <div class="field">
+    <label class="field-label" for="contact-name">Your name</label>
+    <input class="input" id="contact-name" name="name" type="text" autocomplete="name" required>
+  </div>
+  <div class="field">
+    <label class="field-label" for="contact-message">Message</label>
+    <textarea class="input" id="contact-message" name="message" required></textarea>
+    <p class="field-hint">For bug reports, please mention your device, browser and what you were trying to do.</p>
+  </div>
+  <p class="field-hint" id="contact-error" role="alert" hidden>Please add your name and a message.</p>
+  <div>
+    <button class="btn btn-primary btn-lg" type="submit">Open in email app</button>
+  </div>
+</form>
+{{/if}}
+
+<h2>Before you write</h2>
+<ul>
+  <li><strong>Where are my files?</strong> We never receive your images or PDFs. Everything is processed on your own device, so we can't recover a file for you. Simply convert it again.</li>
+  <li><strong>The converter isn't working.</strong> Make sure you are using an up-to-date version of Chrome, Safari, Edge or Firefox, then refresh the page.</li>
+  <li><strong>My PDF is too large.</strong> Choose "Balanced" or "Small file" under Image quality. See <a href="{{base}}/guides/reduce-pdf-file-size/">how to reduce PDF file size</a>.</li>
+</ul>
+<p>For privacy-related requests, please read our <a href="{{base}}/privacy-policy/">Privacy Policy</a> first. It explains what data is and isn't collected.</p>
